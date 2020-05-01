@@ -1,3 +1,4 @@
+import 'package:preflection/MapReader.dart';
 import 'package:preflection/Preflectable.dart';
 
 class DummyModelBeta extends Preflectable<DummyModelBeta>{
@@ -7,7 +8,10 @@ class DummyModelBeta extends Preflectable<DummyModelBeta>{
   
   @override
   DummyModelBeta singleFromMap(Map<String, dynamic> map) {
-    return new DummyModelBeta(name: map["name"]);
+    final mapReader = new MapReader(map);
+    return new DummyModelBeta(
+      name: mapReader.read<String>("name")
+    );
   }
 
   @override

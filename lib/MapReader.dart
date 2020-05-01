@@ -1,71 +1,44 @@
+import 'package:preflection/Preflectable.dart';
+import 'package:preflection/PreflectorError.dart';
+import 'package:preflection/PreflectorTypeParsers.dart';
+import 'package:preflection/preflection.dart';
+
 class MapReader {
-  final Map map;
+  final Map _map;
 
-  MapReader(this.map);
+  MapReader(this._map);
 
-  Guid getGuid(String key) {
-    if (map == null) {
-      return null;
-    } else {
-      _throwExceptionOnMissingKey(key);
-      return new Guid(map[key]);
-    }
+  TType read<TType>(String key) {
+    _throwExceptionOnInsufficientData(key);
+    final fnParser = PreflectorTypeParsers.getParser<TType>();
+    return fnParser(_map[key]);
+  }
+
+  List<T> getList<T extends Preflectable<T>>(String key) {
+    _throwExceptionOnInsufficientData(key);
+    return Preflector.deserializeMany<T>(_map[key]);
+  }
+
+  T getSingle<T extends Preflectable<T>>(String key) {
+    _throwExceptionOnInsufficientData(key);
+    return Preflector.deserializeSingle(_map[key]);
+  }
+
+  _throwExceptionOnInsufficientData(String key){
+    _throwExceptionOnNullMap();
+    _throwExceptionOnMissingKey(key);
   }
 
   _throwExceptionOnMissingKey(key) {
-    if (!map.containsKey(key)) {
-      throw new Exception("Unknown key $key for map");
+    if (!_map.containsKey(key)) {
+      throw new PreflectorError("Unknown key $key for map. Preflector cannot parse");
     }
   }
 
-  getDateTime(String key) {
-    if (map == null) {
-      return null;
-    }
-    return TypeHelper.getDateTime(map[key]);
-  }
-
-  getBool(String key) {
-    if (map == null) {
-      return false;
-    }
-    var value = map[key];
-    return TypeHelper.getBool(value);
-  }
-
-  getDouble(String key) {
-    if (map == null) {
-      return 0.0;
-    } else {
-      return TypeHelper.getDouble(map[key]);
+  _throwExceptionOnNullMap(){
+    if (_map == null) {
+      throw new PreflectorError("Map is null. Preflector cannot parse value");
     }
   }
-
-  int getInt(key) {
-    if (map == null) {
-      return 0;
-    } else {
-      return TypeHelper.getInt(map[key]);
-    }
-  }
-
-  String getString(String key) {
-    if (map == null) {
-      return null;
-    } else {
-      return map[key];
-    }
-  }
-
-  List<T> getList<T extends Model<T>>(String key) {
-    return ModelDeserializationHelper.deserializeMany<T>(map[key]);
-  }
-
-  T getSingle<T extends Model<T>>(String key) {
-    if(map== null){
-      return null;
-    }else{
-      return ModelDeserializationHelper.deserializeSingle(map[key]);
-    }
-  }
+  
 }

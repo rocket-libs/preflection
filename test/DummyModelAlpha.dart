@@ -1,3 +1,4 @@
+import 'package:preflection/MapReader.dart';
 import 'package:preflection/Preflectable.dart';
 
 import 'DummyModelBeta.dart';
@@ -13,15 +14,25 @@ class DummyModelAlpha extends Preflectable<DummyModelAlpha>{
   
   @override
   DummyModelAlpha singleFromMap(Map<String, dynamic> map) {
+    final mapReader = new MapReader(map);
     return new DummyModelAlpha(
-      date: 
-    )
+      date: mapReader.read<DateTime>("date"),
+      dummyModelBeta: mapReader.getSingle<DummyModelBeta>("dummyModelBeta"),
+      flag: mapReader.read<bool>("flag"),
+      name: mapReader.read<String>("name"),
+      number: mapReader.read<double>("number")
+    );
   }
 
   @override
   Map<String, dynamic> toJson() {
-    // TODO: implement toJson
-    return null;
+    return {
+      "date": date.toString(),
+      "dummyModelBeta": dummyModelBeta.toJson(),
+      "flag": flag,
+      "name": name,
+      "number": number,
+    };
   }
 
 }

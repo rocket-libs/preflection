@@ -41,12 +41,12 @@ class Preflector {
   }
 
   static List<dynamic> serializeMany<TType extends Preflectable>(
-      List<TType> models) {
+      List<TType> objectList) {
     final result = new List<dynamic>();
-    if(models == null){
+    if(objectList == null){
       return null;
     }else{
-      for (Preflectable item in models) {
+      for (Preflectable item in objectList) {
         result.add(item.toJson());
       }
       return result;
