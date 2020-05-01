@@ -1,4 +1,3 @@
-import 'package:flutter_guid/flutter_guid.dart';
 import 'package:preflection/PreflectorError.dart';
 
 class PreflectorTypeParsers{
@@ -10,7 +9,6 @@ class PreflectorTypeParsers{
     register<DateTime>(_InbuiltHelpers.getDateTime);
     register<int>(_InbuiltHelpers.getInt);
     register<String>(_InbuiltHelpers.getString);
-    register<Guid>(_InbuiltHelpers.getGuid);
   }
 
   static register<TType>(TType Function(dynamic value) fnParser){
@@ -76,11 +74,6 @@ class _InbuiltHelpers {
       return DateTime.parse(value.toString());
     }
   }
-
-  static Guid getGuid(value){
-    return new Guid(value);
-  }
-
 }
 
 
