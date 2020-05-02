@@ -18,7 +18,7 @@ class Preflector {
       List<dynamic> mapsList) {
     final List<TType> list = new List<TType>();
     if(mapsList == null){
-      return list;
+      return null;
     }else{
       final instance = _objectFactory.getInstance<TType>();
       

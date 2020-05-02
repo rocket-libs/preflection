@@ -29,7 +29,7 @@ class PreflectorTypeParsers{
 class _InbuiltHelpers {
   static double getDouble(value) {
     if (_isEmpty(value)) {
-      return 0.0;
+      return null;
     } else {
       return double.parse(value.toString());
     }
@@ -37,7 +37,7 @@ class _InbuiltHelpers {
 
   static int getInt(value) {
     if (_isEmpty(value)) {
-      return 0;
+      return null;
     } else {
       return int.parse(value.toString());
     }
@@ -45,7 +45,7 @@ class _InbuiltHelpers {
 
   static String getString(value){
     if(_isEmpty(value)){
-      return "";
+      return null;
     }else{
       return value.toString();
     }
@@ -57,7 +57,7 @@ class _InbuiltHelpers {
 
   static bool getBool(value) {
     if (_isEmpty(value)) {
-      return false;
+      return null;
     } else {
       return value.toString().toLowerCase() == "true";
     }
@@ -65,11 +65,7 @@ class _InbuiltHelpers {
 
   static DateTime getDateTime(value) {
     if (_isEmpty(value)) {
-      final referenceDate = DateTime.now();
-      final epoch = referenceDate.subtract(
-        Duration(milliseconds: referenceDate.millisecondsSinceEpoch)
-      );
-      return epoch;
+      return null;
     } else {
       return DateTime.parse(value.toString());
     }

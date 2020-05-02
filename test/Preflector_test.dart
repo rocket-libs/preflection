@@ -1,6 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:preflection/Preflectable.dart';
-import 'package:preflection/PreflectorError.dart';
 import 'package:preflection/PreflectorTypeParsers.dart';
 import 'package:preflection/preflection.dart';
 
@@ -46,7 +45,10 @@ void main(){
       expect(reserialized, serializedModel);
     }
     test("Simple Conversion",() => _conversionCycle<DummyModelBeta>(dummyModelBeta));
+    test("Simple Conversion With number",() => _conversionCycle<DummyModelBeta>(dummyModelBeta.merge(number: 3)));
     test("Complex Conversion",() => _conversionCycle<DummyModelAlpha>(dummyAlphaModel));
+
+    test("Nulls are not mutated",() => _conversionCycle<DummyModelAlpha>(new DummyModelAlpha()));
 
     test("List Conversion",(){
       final listAlphasMap = List<DummyModelAlpha>()
@@ -65,11 +67,26 @@ void main(){
       expect(Preflector.deserializeSingle(null), null);
     });
 
-    test("deserializeMany returns empty list on null",() {
-      final result = Preflector.deserializeMany<DummyModelBeta>(null);
-      final isNotNull = result != null;
-      expect(isNotNull, true);
-      expect(result.length, 0);
+    group("Resolve Value:",(){
+      test("old value is kept when new value is null",(){
+        final oldValue = 3;
+        final result = resolveValue(oldValue, null);
+        expect(result, oldValue);
+      });
+
+      test("New is picked up when old value is null",(){
+        final newValue = 3;
+        final result = resolveValue(null, newValue);
+        expect(result, newValue);
+      });
+
+      test("New overwrites old",(){
+        final newValue = 3;
+        final oldValue = 7;
+        final result = resolveValue(oldValue, newValue);
+        expect(result, newValue);
+      });
+
     });
 
   });

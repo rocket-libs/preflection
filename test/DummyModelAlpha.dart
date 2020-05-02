@@ -33,8 +33,8 @@ class DummyModelAlpha extends Preflectable<DummyModelAlpha>{
   @override
   Map<String, dynamic> toJson() {
     return {
-      "date": date.toString(),
-      "dummyModelBeta": dummyModelBeta.toJson(),
+      "date": date?.toString(),
+      "dummyModelBeta": dummyModelBeta?.toJson(),
       "flag": flag,
       "name": name,
       "number": number,
