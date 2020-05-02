@@ -1,7 +1,6 @@
 library preflection;
 
 import 'package:bargain_di/ObjectFactory.dart';
-import 'package:preflection/Preflectable.dart';
 
 
 

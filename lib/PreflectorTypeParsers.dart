@@ -12,7 +12,24 @@ class PreflectorTypeParsers{
   }
 
   static register<TType>(TType Function(dynamic value) fnParser){
+    _registrationWriter<TType>(fnParser);
+    _registerListParser<TType>();
+  }
+
+  static _registerListParser<TType>(){
+    _registrationWriter<List<TType>>((value) => _listDeserializer<TType>(value));
+  }
+
+  static _registrationWriter<TType>(TType Function(dynamic value) fnParser){
     _typeHelpers[TType] = fnParser;
+  }
+
+  static _listDeserializer<TType>(dynamic value){
+    if(value == null){
+      return null;
+    }else{
+      return (value as List).map((item) => item as TType).toList();
+    }
   }
 
   static TType Function(dynamic) getParser<TType>(){

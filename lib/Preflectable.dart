@@ -3,7 +3,7 @@
 abstract class Preflectable<TType>{
   TType singleFromMap(Map<String, dynamic> map);
 
-  Map<String, dynamic> toJson();
+  Map<String,dynamic> toJson();
 
   TType merge();
 }

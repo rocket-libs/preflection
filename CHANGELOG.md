@@ -5,3 +5,7 @@
 ## [0.0.3] Refactor
 
 * Separated serialization functionality from factory functionality to make the API clearer.
+
+## [0.0.4] Auto List Deserialization
+
+* Added functionality to allow automatic deserialization of list
