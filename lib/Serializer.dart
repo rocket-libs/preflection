@@ -8,7 +8,7 @@ class Serializer{
     if(mapsList == null){
       return null;
     }else{
-      final instance = PreflectorFactory.create<TType>();
+      final instance = PreflectorFactory.instance.create<TType>();
       for (var map in mapsList) {
         list.add(deserializeSingle(map, instance: instance));
       }
@@ -22,7 +22,7 @@ class Serializer{
     if(map == null){
       return null;
     }else{
-      instance = instance ?? PreflectorFactory.create<TType>();
+      instance = instance ?? PreflectorFactory.instance.create<TType>();
       return instance.singleFromMap(map);
     }
   }

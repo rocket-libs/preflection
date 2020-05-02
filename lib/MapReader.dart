@@ -13,7 +13,7 @@ class MapReader {
 
   TType read<TType>(String key) {
     _mapValidator.throwErrorOnMissingKey(key);
-    final fnParser = PreflectorTypeParsers.getParser<TType>();
+    final fnParser = PreflectorTypeParsers.instance.getParser<TType>();
     return fnParser(_map[key]);
   }
 

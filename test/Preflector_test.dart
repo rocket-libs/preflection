@@ -11,10 +11,10 @@ import 'DummyModelCharlie.dart';
 
 
 void main(){
-  PreflectorFactory.addCreator<DummyModelBeta>(() => new DummyModelBeta());
-  PreflectorFactory.addCreator<DummyModelAlpha>(() => new DummyModelAlpha());
-  PreflectorFactory.addCreator<DummyModelCharlie>(() => new DummyModelCharlie());
-  PreflectorTypeParsers.registerInBuiltParsers();
+  PreflectorFactory.instance.addCreator<DummyModelBeta>(() => new DummyModelBeta())
+    .addCreator<DummyModelAlpha>(() => new DummyModelAlpha())
+    .addCreator<DummyModelCharlie>(() => new DummyModelCharlie());
+  PreflectorTypeParsers.instance.registerInBuiltParsers();
   
   group("Serialization And Deserialization:",(){
     final dummyModelBeta = new DummyModelBeta(

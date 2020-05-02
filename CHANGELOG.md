@@ -9,3 +9,7 @@
 ## [0.0.4] Auto List Deserialization
 
 * Added functionality to allow automatic deserialization of list
+
+## [0.0.5] Simplified Calls
+
+* Changed Factory and TypeParser register to singletons to allow chaining of calls

@@ -1,30 +1,34 @@
 import 'package:preflection/PreflectorError.dart';
 
 class PreflectorTypeParsers{
-  static final Map<Type,dynamic Function(dynamic)> _typeHelpers = {};
+  static final instance = new PreflectorTypeParsers();
+
+  final Map<Type,dynamic Function(dynamic)> _typeHelpers = {};
   
-  static registerInBuiltParsers(){
+  PreflectorTypeParsers registerInBuiltParsers(){
     register<double>(_InbuiltHelpers.getDouble);
     register<bool>(_InbuiltHelpers.getBool);
     register<DateTime>(_InbuiltHelpers.getDateTime);
     register<int>(_InbuiltHelpers.getInt);
     register<String>(_InbuiltHelpers.getString);
+    return this;
   }
 
-  static register<TType>(TType Function(dynamic value) fnParser){
+  PreflectorTypeParsers register<TType>(TType Function(dynamic value) fnParser){
     _registrationWriter<TType>(fnParser);
     _registerListParser<TType>();
+    return this;
   }
 
-  static _registerListParser<TType>(){
+  _registerListParser<TType>(){
     _registrationWriter<List<TType>>((value) => _listDeserializer<TType>(value));
   }
 
-  static _registrationWriter<TType>(TType Function(dynamic value) fnParser){
+  _registrationWriter<TType>(TType Function(dynamic value) fnParser){
     _typeHelpers[TType] = fnParser;
   }
 
-  static _listDeserializer<TType>(dynamic value){
+  _listDeserializer<TType>(dynamic value){
     if(value == null){
       return null;
     }else{
@@ -32,7 +36,7 @@ class PreflectorTypeParsers{
     }
   }
 
-  static TType Function(dynamic) getParser<TType>(){
+  TType Function(dynamic) getParser<TType>(){
     final parserDoesNotExist = _typeHelpers.containsKey(TType) == false;
     if(parserDoesNotExist){
       throw new PreflectorError("No parser for type '$TType' has been registered in preflector");

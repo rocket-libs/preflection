@@ -5,14 +5,17 @@ import 'package:bargain_di/ObjectFactory.dart';
 
 
 class PreflectorFactory {
-  static final _objectFactory = new ObjectFactory();
+  final _objectFactory = new ObjectFactory();
+
+  static final instance = new PreflectorFactory();
     
 
-  static void addCreator<TType>(TType Function() typeCreator){
+  PreflectorFactory addCreator<TType>(TType Function() typeCreator){
     _objectFactory.register<TType>(typeCreator);
+    return this;
   }
 
-  static TType create<TType>(){
+  TType create<TType>(){
     return _objectFactory.getInstance<TType>();
   }
   
