@@ -1,6 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:preflection/Preflectable.dart';
 import 'package:preflection/PreflectorTypeParsers.dart';
+import 'package:preflection/Serializer.dart';
 import 'package:preflection/preflection.dart';
 
 import 'DummyModelAlpha.dart';
@@ -10,9 +11,9 @@ import 'DummyModelCharlie.dart';
 
 
 void main(){
-  Preflector.addTypeToFactory<DummyModelBeta>(() => new DummyModelBeta());
-  Preflector.addTypeToFactory<DummyModelAlpha>(() => new DummyModelAlpha());
-  Preflector.addTypeToFactory<DummyModelCharlie>(() => new DummyModelCharlie());
+  PreflectorFactory.addCreator<DummyModelBeta>(() => new DummyModelBeta());
+  PreflectorFactory.addCreator<DummyModelAlpha>(() => new DummyModelAlpha());
+  PreflectorFactory.addCreator<DummyModelCharlie>(() => new DummyModelCharlie());
   PreflectorTypeParsers.registerInBuiltParsers();
   
   group("Serialization And Deserialization:",(){
@@ -40,7 +41,7 @@ void main(){
     void _conversionCycle<TModel extends Preflectable>(Preflectable dummyModel){
       
       final serializedModel = dummyModel.toJson();
-      final deserialized = Preflector.deserializeSingle<TModel>(serializedModel);
+      final deserialized = Serializer.deserializeSingle<TModel>(serializedModel);
       final reserialized = deserialized.toJson();
       expect(reserialized, serializedModel);
     }
@@ -55,16 +56,16 @@ void main(){
       ..add(dummyAlphaModel)
       ..add(dummyAlphaModel);
 
-      final serialized = Preflector.serializeMany(listAlphasMap);
-      final listAlphasRehydrated = Preflector.deserializeMany<DummyModelAlpha>(serialized);
-      final reserialized = Preflector.serializeMany(listAlphasRehydrated);
+      final serialized = Serializer.serializeMany(listAlphasMap);
+      final listAlphasRehydrated = Serializer.deserializeMany<DummyModelAlpha>(serialized);
+      final reserialized = Serializer.serializeMany(listAlphasRehydrated);
 
       expect(listAlphasRehydrated.length, 2);
       expect(reserialized, serialized);
     });
 
     test("Null map returns null",() {
-      expect(Preflector.deserializeSingle(null), null);
+      expect(Serializer.deserializeSingle(null), null);
     });
 
     group("Resolve Value:",(){

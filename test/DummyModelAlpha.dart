@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:preflection/MapReader.dart';
 import 'package:preflection/Preflectable.dart';
+import 'package:preflection/Serializer.dart';
 import 'package:preflection/preflection.dart';
 
 import 'DummyModelBeta.dart';
@@ -38,7 +39,7 @@ class DummyModelAlpha extends Preflectable<DummyModelAlpha>{
       "flag": flag,
       "name": name,
       "number": number,
-      "charlies": Preflector.serializeMany(charlies)
+      "charlies": Serializer.serializeMany(charlies)
     };
   }
 

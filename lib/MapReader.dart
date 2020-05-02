@@ -1,7 +1,7 @@
 import 'package:preflection/MapValidator.dart';
 import 'package:preflection/Preflectable.dart';
 import 'package:preflection/PreflectorTypeParsers.dart';
-import 'package:preflection/preflection.dart';
+import 'package:preflection/Serializer.dart';
 
 class MapReader {
   final Map _map;
@@ -19,12 +19,12 @@ class MapReader {
 
   List<T> getList<T extends Preflectable<T>>(String key) {
     _mapValidator.throwErrorOnMissingKey(key);
-    return Preflector.deserializeMany<T>(_map[key]);
+    return Serializer.deserializeMany<T>(_map[key]);
   }
 
   T getSingle<T extends Preflectable<T>>(String key) {
     _mapValidator.throwErrorOnMissingKey(key);
-    return Preflector.deserializeSingle(_map[key]);
+    return Serializer.deserializeSingle(_map[key]);
   }
 
   
