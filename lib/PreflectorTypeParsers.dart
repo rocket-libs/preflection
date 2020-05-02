@@ -16,11 +16,11 @@ class PreflectorTypeParsers{
 
   PreflectorTypeParsers register<TType>(TType Function(dynamic value) fnParser){
     _registrationWriter<TType>(fnParser);
-    _registerListParser<TType>();
+    registerListParser<TType>();
     return this;
   }
 
-  _registerListParser<TType>(){
+  registerListParser<TType>(){
     _registrationWriter<List<TType>>((value) => _listDeserializer<TType>(value));
   }
 

@@ -1,6 +1,7 @@
 library preflection;
 
 import 'package:bargain_di/ObjectFactory.dart';
+import 'package:preflection/PreflectorTypeParsers.dart';
 
 
 
@@ -12,6 +13,7 @@ class PreflectorFactory {
 
   PreflectorFactory addCreator<TType>(TType Function() typeCreator){
     _objectFactory.register<TType>(typeCreator);
+    PreflectorTypeParsers.instance.registerListParser<TType>();
     return this;
   }
 

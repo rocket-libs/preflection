@@ -1,6 +1,6 @@
 name: preflection
 description: Code generation tool that simulates reflection, to lessen boiler-plate in serilizing and deserilizing objects.
-version: 0.0.5
+version: 0.0.6
 homepage: https://github.com/rocket-libs/preflection
 
 environment:

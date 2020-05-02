@@ -13,3 +13,7 @@
 ## [0.0.5] Simplified Calls
 
 * Changed Factory and TypeParser register to singletons to allow chaining of calls
+
+## [0.0.6] Convenience
+
+* List parsing is now registered for you when a type is added to factory
