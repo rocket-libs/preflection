@@ -1,3 +1,5 @@
+## [0.0.8] Bug fixes.
+* Stopped using the default List construction which is no longer supported by type safety
 ## [0.0.7] Type Safety and Identifiable exceptions
 
 * Added type safety and error codes to thrown exceptions

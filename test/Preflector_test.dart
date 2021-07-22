@@ -21,7 +21,7 @@ void main(){
         name: "Johnny Bravo"
     );
 
-    final charlies = new List<DummyModelCharlie>()
+    final charlies = new List<DummyModelCharlie>.empty(growable: true)
     ..add(new DummyModelCharlie(
       date: DateTime.now()
     ))
@@ -52,7 +52,7 @@ void main(){
     test("Nulls are not mutated",() => _conversionCycle<DummyModelAlpha>(new DummyModelAlpha()));
 
     test("List Conversion",(){
-      final listAlphasMap = List<DummyModelAlpha>()
+      final listAlphasMap = List<DummyModelAlpha>.empty(growable: true)
       ..add(dummyAlphaModel)
       ..add(dummyAlphaModel);
 

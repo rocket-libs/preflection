@@ -4,7 +4,7 @@ import 'package:preflection/preflection.dart';
 class Serializer{
   static List<TType?>? deserializeMany<TType extends Preflectable<TType>>(
       List<dynamic>? mapsList) {
-    final List<TType?> list = new List<TType?>();
+    final List<TType?> list = new List<TType?>.empty(growable: true);
     if(mapsList == null){
       return null;
     }else{
@@ -29,7 +29,7 @@ class Serializer{
 
   static List<dynamic>? serializeMany<TType extends Preflectable?>(
       List<TType>? objectList) {
-    final result = new List<dynamic>();
+    final result = new List<dynamic>.empty(growable: true);
     if(objectList == null){
       return null;
     }else{
