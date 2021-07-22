@@ -4,8 +4,8 @@ import 'package:preflection/Preflectable.dart';
 
 @immutable
 class DummyModelBeta extends Preflectable<DummyModelBeta>{
-  final String name;
-  final int number;
+  final String? name;
+  final int? number;
 
   DummyModelBeta({this.number, this.name});
   
@@ -27,7 +27,7 @@ class DummyModelBeta extends Preflectable<DummyModelBeta>{
   }
 
   @override
-  DummyModelBeta merge({String name,int number}) {
+  DummyModelBeta merge({String? name,int? number}) {
     return new DummyModelBeta(name: name, number: number);
   }
 

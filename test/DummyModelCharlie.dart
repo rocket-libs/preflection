@@ -4,11 +4,11 @@ import 'package:flutter/foundation.dart';
 
 @immutable
 class DummyModelCharlie extends Preflectable<DummyModelCharlie>{
-  final DateTime date;
+  final DateTime? date;
 
   DummyModelCharlie({this.date});
   @override
-  merge({DateTime dateNew}) {
+  merge({DateTime? dateNew}) {
     return new DummyModelCharlie(
       date: resolveValue(date, dateNew)
     );

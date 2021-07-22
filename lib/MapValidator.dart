@@ -2,7 +2,7 @@ import 'PreflectorError.dart';
 import 'PreflectorErrorCodes.dart';
 
 class MapValidator{
-  final Map _map;
+  final Map? _map;
 
   MapValidator(this._map){
     _throwErrorOnNullMap();
@@ -11,7 +11,7 @@ class MapValidator{
   
 
   throwErrorOnMissingKey(key) {
-    if (!_map.containsKey(key)) {
+    if (!_map!.containsKey(key)) {
       throw new PreflectorError("Unknown key $key for map. Preflector cannot parse",code: PreflectorErrorCodes.MapMissingSpecifiedKey);
     }
   }

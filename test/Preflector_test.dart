@@ -41,7 +41,7 @@ void main(){
     void _conversionCycle<TModel extends Preflectable>(Preflectable dummyModel){
       
       final serializedModel = dummyModel.toJson();
-      final deserialized = Serializer.deserializeSingle<TModel>(serializedModel);
+      final TModel deserialized = Serializer.deserializeSingle<TModel>(serializedModel)!;
       final reserialized = deserialized.toJson();
       expect(reserialized, serializedModel);
     }
@@ -57,7 +57,7 @@ void main(){
       ..add(dummyAlphaModel);
 
       final serialized = Serializer.serializeMany(listAlphasMap);
-      final listAlphasRehydrated = Serializer.deserializeMany<DummyModelAlpha>(serialized);
+      final listAlphasRehydrated = Serializer.deserializeMany<DummyModelAlpha>(serialized)!;
       final reserialized = Serializer.serializeMany(listAlphasRehydrated);
 
       expect(listAlphasRehydrated.length, 2);

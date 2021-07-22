@@ -8,12 +8,12 @@ import 'DummyModelCharlie.dart';
 
 @immutable
 class DummyModelAlpha extends Preflectable<DummyModelAlpha>{
-  final String name;
-  final double number;
-  final bool flag;
-  final DateTime date;
-  final DummyModelBeta dummyModelBeta;
-  final List<DummyModelCharlie> charlies;
+  final String? name;
+  final double? number;
+  final bool? flag;
+  final DateTime? date;
+  final DummyModelBeta? dummyModelBeta;
+  final List<DummyModelCharlie?>? charlies;
 
   DummyModelAlpha({this.charlies,this.name, this.number, this.flag, this.date, this.dummyModelBeta});
   
@@ -43,7 +43,7 @@ class DummyModelAlpha extends Preflectable<DummyModelAlpha>{
   }
 
   @override
-  DummyModelAlpha merge({String nameNew, double numberNew, bool flagNew, DateTime dateNew, DummyModelBeta dummyModelBetaNew, List<DummyModelCharlie> charliesNew}) {
+  DummyModelAlpha merge({String? nameNew, double? numberNew, bool? flagNew, DateTime? dateNew, DummyModelBeta? dummyModelBetaNew, List<DummyModelCharlie>? charliesNew}) {
     return new DummyModelAlpha(
       date: resolveValue(date, dateNew),
       dummyModelBeta: resolveValue(dummyModelBeta, dummyModelBetaNew),

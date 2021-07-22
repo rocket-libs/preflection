@@ -6,11 +6,11 @@ class PreflectorTypeParsers{
   final Map<Type,dynamic Function(dynamic)> _typeHelpers = {};
   
   PreflectorTypeParsers registerInBuiltParsers(){
-    register<double>(_InbuiltHelpers.getDouble);
-    register<bool>(_InbuiltHelpers.getBool);
-    register<DateTime>(_InbuiltHelpers.getDateTime);
-    register<int>(_InbuiltHelpers.getInt);
-    register<String>(_InbuiltHelpers.getString);
+    register<double?>(_InbuiltHelpers.getDouble);
+    register<bool?>(_InbuiltHelpers.getBool);
+    register<DateTime?>(_InbuiltHelpers.getDateTime);
+    register<int?>(_InbuiltHelpers.getInt);
+    register<String?>(_InbuiltHelpers.getString);
     return this;
   }
 
@@ -36,19 +36,19 @@ class PreflectorTypeParsers{
     }
   }
 
-  TType Function(dynamic) getParser<TType>(){
+  TType Function(dynamic)? getParser<TType>(){
     final parserDoesNotExist = _typeHelpers.containsKey(TType) == false;
     if(parserDoesNotExist){
       throw new PreflectorError("No parser for type '$TType' has been registered in preflector");
     }else{
-      return _typeHelpers[TType];
+      return _typeHelpers[TType] as TType Function(dynamic)?;
     }
   }
 
 }
 
 class _InbuiltHelpers {
-  static double getDouble(value) {
+  static double? getDouble(value) {
     if (_isEmpty(value)) {
       return null;
     } else {
@@ -56,7 +56,7 @@ class _InbuiltHelpers {
     }
   }
 
-  static int getInt(value) {
+  static int? getInt(value) {
     if (_isEmpty(value)) {
       return null;
     } else {
@@ -64,7 +64,7 @@ class _InbuiltHelpers {
     }
   }
 
-  static String getString(value){
+  static String? getString(value){
     if(_isEmpty(value)){
       return null;
     }else{
@@ -76,7 +76,7 @@ class _InbuiltHelpers {
     return value == null || value.toString().isEmpty;
   }
 
-  static bool getBool(value) {
+  static bool? getBool(value) {
     if (_isEmpty(value)) {
       return null;
     } else {
@@ -84,7 +84,7 @@ class _InbuiltHelpers {
     }
   }
 
-  static DateTime getDateTime(value) {
+  static DateTime? getDateTime(value) {
     if (_isEmpty(value)) {
       return null;
     } else {
