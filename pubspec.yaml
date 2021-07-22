@@ -9,7 +9,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  bargain_di: ^1.0.3
+  bargain_di: ^1.0.4
 
 dev_dependencies:
   flutter_test:
