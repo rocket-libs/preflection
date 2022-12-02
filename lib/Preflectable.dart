@@ -1,13 +1,11 @@
-
-
-abstract class Preflectable<TType>{
+abstract class Preflectable<TType> {
   TType singleFromMap(Map<String, dynamic> map);
 
-  Map<String,dynamic> toJson();
+  Map<String, dynamic> toJson();
 
   TType merge();
 }
 
-T resolveValue<T>(T currentValue, T newValue) {
+T? resolveValue<T>(T? currentValue, T? newValue) {
   return newValue == null ? currentValue : newValue;
 }
