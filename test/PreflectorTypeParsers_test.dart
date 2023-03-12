@@ -4,11 +4,9 @@ import 'package:preflection/PreflectorTypeParsers.dart';
 
 import 'DummyModelAlpha.dart';
 
-void main(){
-  
-  test("Missing parser causes exception",(){
+void main() {
+  test("Missing parser causes exception", () {
     expect(() => PreflectorTypeParsers.instance.getParser<DummyModelAlpha>(),
-     throwsA((e) => e != null && e is PreflectorError)
-    );
+        throwsA((e) => e != null && e is PreflectorError));
   });
 }

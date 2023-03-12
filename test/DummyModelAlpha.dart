@@ -7,7 +7,7 @@ import 'DummyModelBeta.dart';
 import 'DummyModelCharlie.dart';
 
 @immutable
-class DummyModelAlpha extends Preflectable<DummyModelAlpha>{
+class DummyModelAlpha extends Preflectable<DummyModelAlpha> {
   final String? name;
   final double? number;
   final bool? flag;
@@ -15,19 +15,24 @@ class DummyModelAlpha extends Preflectable<DummyModelAlpha>{
   final DummyModelBeta? dummyModelBeta;
   final List<DummyModelCharlie?>? charlies;
 
-  DummyModelAlpha({this.charlies,this.name, this.number, this.flag, this.date, this.dummyModelBeta});
-  
+  DummyModelAlpha(
+      {this.charlies,
+      this.name,
+      this.number,
+      this.flag,
+      this.date,
+      this.dummyModelBeta});
+
   @override
   DummyModelAlpha singleFromMap(Map<String, dynamic> map) {
     final mapReader = new MapReader(map);
     return new DummyModelAlpha(
-      date: mapReader.read<DateTime>("date"),
-      dummyModelBeta: mapReader.getSingle<DummyModelBeta>("dummyModelBeta"),
-      flag: mapReader.read<bool>("flag"),
-      name: mapReader.read<String>("name"),
-      number: mapReader.read<double>("number"),
-      charlies: mapReader.getList<DummyModelCharlie>("charlies")
-    );
+        date: mapReader.read<DateTime>("date"),
+        dummyModelBeta: mapReader.getSingle<DummyModelBeta>("dummyModelBeta"),
+        flag: mapReader.read<bool>("flag"),
+        name: mapReader.read<String>("name"),
+        number: mapReader.read<double>("number"),
+        charlies: mapReader.getList<DummyModelCharlie>("charlies"));
   }
 
   @override
@@ -43,15 +48,19 @@ class DummyModelAlpha extends Preflectable<DummyModelAlpha>{
   }
 
   @override
-  DummyModelAlpha merge({String? nameNew, double? numberNew, bool? flagNew, DateTime? dateNew, DummyModelBeta? dummyModelBetaNew, List<DummyModelCharlie>? charliesNew}) {
+  DummyModelAlpha merge(
+      {String? nameNew,
+      double? numberNew,
+      bool? flagNew,
+      DateTime? dateNew,
+      DummyModelBeta? dummyModelBetaNew,
+      List<DummyModelCharlie>? charliesNew}) {
     return new DummyModelAlpha(
-      date: resolveValue(date, dateNew),
-      dummyModelBeta: resolveValue(dummyModelBeta, dummyModelBetaNew),
-      flag: resolveValue(flag, flagNew),
-      name: resolveValue(name, nameNew),
-      number: resolveValue(number, numberNew),
-      charlies: resolveValue(charlies, charliesNew)
-    );
+        date: resolveValue(date, dateNew),
+        dummyModelBeta: resolveValue(dummyModelBeta, dummyModelBetaNew),
+        flag: resolveValue(flag, flagNew),
+        name: resolveValue(name, nameNew),
+        number: resolveValue(number, numberNew),
+        charlies: resolveValue(charlies, charliesNew));
   }
-
 }

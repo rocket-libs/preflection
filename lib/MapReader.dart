@@ -7,26 +7,32 @@ class MapReader {
   final Map _map;
   late MapValidator _mapValidator;
 
-  MapReader(this._map){
+  MapReader(this._map) {
     _mapValidator = new MapValidator(_map);
   }
 
-  TType read<TType>(String key) {
+  TType read<TType>(String key, {TType? valueIfKeyMissing}) {
+    if (_mapValidator.keyIsMissing(key)) {
+      return valueIfKeyMissing as TType;
+    }
     _mapValidator.throwErrorOnMissingKey(key);
     final fnParser = PreflectorTypeParsers.instance.getParser<TType>()!;
     return fnParser(_map[key]);
   }
 
   List<T?>? getList<T extends Preflectable<T>>(String key) {
+    if (_mapValidator.keyIsMissing(key)) {
+      return [];
+    }
     _mapValidator.throwErrorOnMissingKey(key);
     return Serializer.deserializeMany<T>(_map[key]);
   }
 
   T? getSingle<T extends Preflectable<T>>(String key) {
+    if (_mapValidator.keyIsMissing(key)) {
+      return null;
+    }
     _mapValidator.throwErrorOnMissingKey(key);
     return Serializer.deserializeSingle(_map[key]);
   }
-
-  
-  
 }
